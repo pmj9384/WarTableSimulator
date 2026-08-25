@@ -1,0 +1,11 @@
+SkinId,SkinName,Grade,GachaRate,IsDefault
+Common_GreenNature,Green Nature,Common,0.15,true
+Common_PinkCandy,Pink Candy,Common,0.15,false
+Common_SimpleBlue,Simple Blue,Common,0.15,false
+Common_YellowSunny,Yellow Sunny,Common,0.15,false
+Rare_Fire,Fire,Rare,0.10,false
+Rare_Ice,Ice,Rare,0.10,false
+Rare_Poison,Poison,Rare,0.10,false
+Epic_DarkVoid,Dark Void,Epic,0.05,false
+Epic_HolyLight,Holy Light,Epic,0.025,false
+Epic_Lightning,Lightning,Epic,0.025,false
