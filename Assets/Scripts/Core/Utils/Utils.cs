@@ -15,7 +15,6 @@ public static class Utils
     public const string AdditionalStatusEffectTableName= "AdditionalStatusEffect_Table";
     public const string InGameLevelExperienceValueTableName= "InGameLevelExperienceValue_Table";
     public const string PassiveEffectTableName= "PassiveEffect_Table";
-    public const string GachaTableName= "Gacha_Table";
     public const string PlayerLevelTableName = "PlayerLevel_Table";
     public const string EnforceAnimalTableName = "EnforceAnimal_Table";
     
@@ -38,8 +37,6 @@ public static class Utils
     public const string BossAttackPattern2AnimatorString = "Attack2";
     public const string BossDeathAnimatorString = "Death";
 
-    public const string StaminaGoldUseStringKey = "OUTGAME_GOLD";
-    public const string GachaSingleAdsStringKey = "OUTGAME_ADS";
     public const string AnimalGradeSortDropDownStringKey = "OUTGAME_GRADE";
     public const string AnimalLevelSortDropDownStringKey = "OUTGAME_LEVEL";
     public const string AnimalQuitGameStringKey = "OUTGAME_END";
@@ -49,7 +46,6 @@ public static class Utils
     public const string AnimalNoMoneyStringKey = "OUTGAME_NO_MONEY";
     public const string AnimalBuyStringKey = "OUTGAME_BUY";
     public const string AnimalUpgradeProcessStringKey = "OUTGAME_UPGRADE_PROCESS";
-    public const string AnimalManyStaminaStringKey = "OUTGAME_MANYSTAMINA";
     public const string AnimalAttackPowerStringKey = "OUTGAME_ATTACKPOWER";
     public const string AnimalLevelStringKey = "OUTGAME_LEVEL";
     public const string AnimalSkillStringKey = "OUTGAME_SKILL";
