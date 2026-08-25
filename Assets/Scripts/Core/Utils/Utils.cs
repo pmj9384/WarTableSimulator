@@ -38,7 +38,6 @@ public static class Utils
     public const string BossAttackPattern2AnimatorString = "Attack2";
     public const string BossDeathAnimatorString = "Death";
 
-    public const string StaminaGoldUseStringKey = "OUTGAME_GOLD";
     public const string GachaSingleAdsStringKey = "OUTGAME_ADS";
     public const string AnimalGradeSortDropDownStringKey = "OUTGAME_GRADE";
     public const string AnimalLevelSortDropDownStringKey = "OUTGAME_LEVEL";
@@ -49,7 +48,6 @@ public static class Utils
     public const string AnimalNoMoneyStringKey = "OUTGAME_NO_MONEY";
     public const string AnimalBuyStringKey = "OUTGAME_BUY";
     public const string AnimalUpgradeProcessStringKey = "OUTGAME_UPGRADE_PROCESS";
-    public const string AnimalManyStaminaStringKey = "OUTGAME_MANYSTAMINA";
     public const string AnimalAttackPowerStringKey = "OUTGAME_ATTACKPOWER";
     public const string AnimalLevelStringKey = "OUTGAME_LEVEL";
     public const string AnimalSkillStringKey = "OUTGAME_SKILL";

@@ -11,7 +11,6 @@ public abstract class SaveData
 public class SaveDataV1 : SaveData
 {
     public PlayerAccountDataSave playerAccountDataSave;
-    public StaminaSystemSave staminaSystemSave;
     public SkinUserDataSave skinUserDataSave;
 
     // [AnimalBreakOut] 게임 전용 시스템
