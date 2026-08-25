@@ -27,3 +27,10 @@ Thumbs.db
 [Rr]ecordings/
 sysinfo.txt
 crashlytics-build.properties
+
+# EDM4U (External Dependency Manager) — Android Resolver 재생성물
+# 리졸버가 Play Services 의존을 받아 채우는 산출물이라 리포에 고정하지 않는다.
+# GvhProjectSettings.xml은 EDM4U 동작 설정이라 반대로 커밋한다.
+[Aa]ssets/Plugins/Android/
+[Aa]ssets/Plugins/Android.meta
+ProjectSettings/AndroidResolverDependencies.xml
