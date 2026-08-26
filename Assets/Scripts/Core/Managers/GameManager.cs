@@ -138,10 +138,12 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
+    // 인게임 → 아웃게임 복귀. RestartGame과 몸통이 같아 현재 씬을 다시 로드하던 것을 고쳤다
+    // (일시정지 창의 홈 버튼이 로비로 못 가고 판을 재시작시켰다)
     public void GoToTitle()
     {
         Time.timeScale = 1f;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        SceneManager.LoadScene("LobbyScene");
     }
 
     public void AddGameStateEnterAction(GameState state, Action action) => gameStateEnterAction[(int)state] += action;

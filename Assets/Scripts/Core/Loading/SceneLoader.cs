@@ -11,7 +11,11 @@ using UnityEngine.SceneManagement;
 public class SceneLoader : MonoBehaviour
 {
     [SerializeField] private string nextSceneName = "LobbyScene";
-    [SerializeField] private string preloadLabel = "Skins";   // Addressables 라벨 — 비우면 프리로드 생략
+    // Addressables 라벨 — 비우면 프리로드 생략. 템플릿 기본값은 빈 문자열이다:
+    // 새 프로젝트엔 Addressables 설정 자체가 없어서, 라벨이 차 있으면 부팅하자마자
+    // 런타임 데이터 로드 실패로 콘솔에 에러가 쌓인다(아래 Preload의 라벨 부재 방어보다 한 층 아래 실패라 막히지 않는다).
+    // 프리로드할 에셋 그룹이 생기면 그 라벨을 적어 되살린다 — 등록은 AddressablesFolderRegistrar가 담당한다.
+    [SerializeField] private string preloadLabel = "";
     [SerializeField] private float minShowSeconds = 1f;       // 로컬 로드는 순식간 — 스플래시가 깜빡 사라지는 것 방지
     [SerializeField] private LoadingSceneUI ui;
 
