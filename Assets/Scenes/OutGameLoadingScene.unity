@@ -630,7 +630,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneLoader
   nextSceneName: LobbyScene
-  preloadLabel: Skins
+  preloadLabel: 
   minShowSeconds: 1
   ui: {fileID: 1205843572}
 --- !u!4 &1205843574
