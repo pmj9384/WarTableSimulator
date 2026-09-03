@@ -1,0 +1,9 @@
+unitId,role,popCost,hp,atk,atkInterval,atkRange,moveSpeed,aoeRadius,structureMult,healPerSec,healRadius,displayName,description,icon
+Grunt,물량,1,80,8,1.0,1.5,3.5,0,1,0,0,Grunt,,
+Striker,근접 딜러,2,140,22,0.8,1.5,3.8,0,1,0,0,Striker,,
+Guardian,탱커,3,420,14,1.2,1.8,3.0,0,1,0,0,Guardian,,
+Marksman,원거리,2,90,30,1.5,8,3.2,0,1,0,0,Marksman,,
+Mortar,광역,3,110,16,2.0,10,2.8,3,1,0,0,Mortar,,
+Skirmisher,기동,2,100,18,1.0,1.5,6.0,0,1,0,0,Skirmisher,,
+Breacher,공성,2,130,12,1.5,1.5,3.4,0,8,0,0,Breacher,,
+Sniper,저격,3,70,70,3.0,16,2.6,0,1,0,0,Sniper,,
