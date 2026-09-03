@@ -33,7 +33,10 @@ public class GameManager : MonoBehaviour
 
     public ObjectPoolManager ObjectPool { get; private set; }
     public GameUIManager UIManager { get; private set; }
-    // TODO: 게임별 매니저 추가
+    // 게임별 매니저 (War Table Simulator)
+    public UnitManager Units { get; private set; }
+    public BattleManager Battle { get; private set; }
+    public MatchManager Match { get; private set; }
 
     #endregion
 
@@ -89,7 +92,9 @@ public class GameManager : MonoBehaviour
         List<GameObject> managerObjects = GameObject.FindGameObjectsWithTag("Manager").ToList();
 
         UIManager = RegisterManager<GameUIManager>(managerObjects);
-        // TODO: 게임별 매니저 등록 추가
+        Units = RegisterManager<UnitManager>(managerObjects);
+        Battle = RegisterManager<BattleManager>(managerObjects);
+        Match = RegisterManager<MatchManager>(managerObjects);
 
         foreach (var manager in managers)
         {
