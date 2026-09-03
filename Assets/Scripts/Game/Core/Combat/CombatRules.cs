@@ -13,6 +13,12 @@ namespace Game.Core.Combat
             return distance <= range;
         }
 
+        // 제곱거리 버전 — TargetSelector가 √ 없이 계산한 거리²를 그대로 판정에 쓴다 (의미는 IsInRange와 동일)
+        public static bool IsInRangeSq(float distanceSq, float range)
+        {
+            return distanceSq <= range * range;
+        }
+
         // 구조물 배수는 구조물을 칠 때만 — 유닛 상대로는 원래 atk (Breacher 12 / 벽엔 96)
         public static float DamageAgainst(float atk, float structureMult, bool targetIsStructure)
         {
