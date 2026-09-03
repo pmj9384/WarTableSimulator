@@ -14,6 +14,13 @@ public class CombatRulesTests
         Assert.IsFalse(CombatRules.IsInRange(1.5001f, 1.5f), "사거리 밖 = 공격 불가");
     }
 
+    [Test]
+    public void 제곱거리_판정도_경계를_포함한다()
+    {
+        Assert.IsTrue(CombatRules.IsInRangeSq(2.25f, 1.5f), "1.5² = 2.25 정확히 경계");
+        Assert.IsFalse(CombatRules.IsInRangeSq(2.26f, 1.5f));
+    }
+
     // ── DamageAgainst: 구조물 배수는 구조물에만 (스펙 4절 Breacher atk 12, structureMult 8)
     [Test]
     public void 구조물_배수는_구조물을_칠_때만_붙는다()
