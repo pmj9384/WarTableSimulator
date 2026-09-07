@@ -68,6 +68,13 @@ public class BattleManager : InGameManager
             GameManager.Units.Despawn(deadBuffer[i]);
         }
         deadBuffer.Clear();
+
+        // 전멸은 틱 안에서 일어나는 사건이라 그 자리에서 판정하고, 판을 끝내는 건 국면 담당에게 넘긴다
+        int winnerTeam;
+        if (IsBattleOver(out winnerTeam))
+        {
+            GameManager.Match.EndBattle(winnerTeam);
+        }
     }
 
     private readonly List<UnitController> deadBuffer = new List<UnitController>();
