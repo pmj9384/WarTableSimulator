@@ -64,7 +64,9 @@ public class BattleManager : InGameManager
         }
 
         for (int i = 0; i < deadBuffer.Count; i++)
+        {
             GameManager.Units.Despawn(deadBuffer[i]);
+        }
         deadBuffer.Clear();
     }
 
