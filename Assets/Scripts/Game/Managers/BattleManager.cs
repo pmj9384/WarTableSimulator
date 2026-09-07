@@ -27,7 +27,10 @@ public class BattleManager : InGameManager
         running = true;
     }
 
-    public void StopBattle() => running = false;
+    public void StopBattle()
+    {
+        running = false;
+    }
 
     #region 심장 — 고정 스텝 틱 [분할 후보: BattleTicker]
     // FixedUpdate = 고정 스텝(기본 0.02s): 기기가 달라도 틱 수·순서가 같아야 결과가 같다 (멀티 전제)
@@ -52,10 +55,20 @@ public class BattleManager : InGameManager
                 if (battleElapsed >= SuddenDeathStartSec)
                     unit.TakeDamage(CombatRules.SuddenDeathTick(unit.Stats.Hp, dt));
 
+                unit.TickTimers(dt);
                 sharedTree.Tick(unit);
+
+                if (unit.IsDead)
+                    deadBuffer.Add(unit);   // 순회 도중 반환 금지 — 컬렉션이 흔들린다 (틱 끝 일괄)
             }
         }
+
+        for (int i = 0; i < deadBuffer.Count; i++)
+            GameManager.Units.Despawn(deadBuffer[i]);
+        deadBuffer.Clear();
     }
+
+    private readonly List<UnitController> deadBuffer = new List<UnitController>();
     #endregion
 
     #region 눈 — 타겟 캐시 [분할 후보: TargetingManager]
@@ -66,9 +79,32 @@ public class BattleManager : InGameManager
         if (retargetTimer > 0f) return;
         retargetTimer = RetargetIntervalSec;
 
-        // TODO(Task 6): 유닛별로 상대팀 로스터 → TargetInfo 목록 → TargetSelector.SelectNearest
-        //               → unit에 타겟 캐시 주입. UnitController에 타겟 보관이 생기는 Task 6에서 배선.
+        for (int team = 0; team < 2; team++)
+        {
+            IReadOnlyList<UnitController> enemies = GameManager.Units.Roster(1 - team);
+
+            // 산 적만 후보로 — 정의역(누가 후보인가)은 호출자 책임 (TargetSelector 계약)
+            candidateBuffer.Clear();
+            for (int i = 0; i < enemies.Count; i++)
+            {
+                if (enemies[i].IsDead) continue;
+                Vector3 p = enemies[i].transform.position;
+                candidateBuffer.Add(new TargetInfo(enemies[i].SpawnIndex, p.x, p.z, TargetKind.Unit));
+            }
+
+            IReadOnlyList<UnitController> roster = GameManager.Units.Roster(team);
+            for (int i = 0; i < roster.Count; i++)
+            {
+                UnitController unit = roster[i];
+                if (unit.IsDead) continue;
+                Vector3 my = unit.transform.position;
+                int targetIndex = TargetSelector.SelectNearest(my.x, my.z, candidateBuffer);
+                unit.SetTarget(targetIndex >= 0 ? GameManager.Units.Find(targetIndex) : null);
+            }
+        }
     }
+
+    private readonly List<TargetInfo> candidateBuffer = new List<TargetInfo>();  // 매 갱신 재사용 — 틱마다 새 리스트 금지
     #endregion
 
     #region 심판 — 전멸 판정 [계산은 이미 VictoryRules(순수)로 분리됨]

@@ -11,15 +11,18 @@ public class UnitManager : InGameManager
 
     private ObjectPool<GameObject> pool;
     private readonly List<UnitController>[] rosters = { new List<UnitController>(), new List<UnitController>() };
+    private readonly Dictionary<int, UnitController> byIndex = new Dictionary<int, UnitController>();  // 스폰인덱스 → 실체 (눈이 씀)
     private int nextSpawnIndex;   // 자체 발급 스폰 순번 — 타이브레이크의 근원 (GetInstanceID 금지)
 
     public override void Initialize()
     {
-        pool = GameManager.ObjectPool.CreateObjectPool(
+        pool = GameManager.ObjectPool.CreateObjectPool
+        (
             unitPrefab,
-            () => Instantiate(unitPrefab),
-            obj => obj.SetActive(true),
-            obj => obj.SetActive(false));
+            CreateUnit,
+            OnGetFromPool,
+            OnReleaseToPool
+        );
     }
 
     public UnitController Spawn(string unitId, int team, Vector3 position)
@@ -28,21 +31,51 @@ public class UnitManager : InGameManager
         var unit = pool.Get().GetComponent<UnitController>();
         unit.Setup(nextSpawnIndex++, team, stats, position);
         rosters[team].Add(unit);
+        byIndex[unit.SpawnIndex] = unit;
         return unit;
     }
 
     public void Despawn(UnitController unit)
     {
         rosters[unit.Team].Remove(unit);
+        byIndex.Remove(unit.SpawnIndex);
         pool.Release(unit.gameObject);
     }
 
-    public IReadOnlyList<UnitController> Roster(int team) => rosters[team];
+    public IReadOnlyList<UnitController> Roster(int team)
+    {
+        return rosters[team];
+    }
+
+    // 스폰인덱스로 실체를 찾는다 — 없으면(이미 반환됐으면) null
+    public UnitController Find(int spawnIndex)
+    {
+        UnitController unit;
+        if (byIndex.TryGetValue(spawnIndex, out unit)) return unit;
+        return null;
+    }
+
+    // 풀이 부르는 세 콜백 — 템플릿 CreateObjectPool이 함수를 인자로 받는다
+    private GameObject CreateUnit()
+    {
+        return Instantiate(unitPrefab);
+    }
+
+    private void OnGetFromPool(GameObject unit)
+    {
+        unit.SetActive(true);
+    }
+
+    private void OnReleaseToPool(GameObject unit)
+    {
+        unit.SetActive(false);
+    }
 
     public override void Clear()
     {
         rosters[0].Clear();
         rosters[1].Clear();
+        byIndex.Clear();
         nextSpawnIndex = 0;
     }
 }
