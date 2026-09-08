@@ -37,6 +37,7 @@ public class GameManager : MonoBehaviour
     public UnitManager Units { get; private set; }
     public BattleManager Battle { get; private set; }
     public MatchManager Match { get; private set; }
+    public HudManager Hud { get; private set; }
 
     #endregion
 
@@ -95,6 +96,7 @@ public class GameManager : MonoBehaviour
         Units = RegisterManager<UnitManager>(managerObjects);
         Battle = RegisterManager<BattleManager>(managerObjects);
         Match = RegisterManager<MatchManager>(managerObjects);
+        Hud = RegisterManager<HudManager>(managerObjects);
 
         foreach (var manager in managers)
         {
